@@ -4,7 +4,7 @@
   "description": "从Markdown字段读取摘要，悬停显示，单击跳转预览",
   "version": "1.0.0",
   "publisher": "RiTru",
-  "readme": "doc/README.md",
+  "readme": "docs/README.md",
   "icon": "icon.png",
   "repository":"https://github.com/Ri-Tru/Writing-Assistant",
   "engines": {

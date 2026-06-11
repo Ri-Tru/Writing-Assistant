@@ -22,7 +22,7 @@ Writing Assistant 是一个纯 JavaScript 实现的 VS Code 扩展，零外部 n
 | 语言 | JavaScript (ES2020) |
 | VS Code API | ^1.70.0 |
 | 外部依赖 | 无 |
-| 打包工具 | [build.py](../build.py)（Python 3 + vsce） |
+| 打包工具 | [build.py](../../build.py)（Python 3 + vsce） |
 
 ---
 

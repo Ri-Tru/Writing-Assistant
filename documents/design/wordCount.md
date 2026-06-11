@@ -2,7 +2,7 @@
 
 *版本：V1.0，上次更新：2026-6-11*
 
-[模块功能](../README/README.zh-cn.md#2-2.字数统计)
+[模块功能](../../extension/docs/README.zh-cn.md#2-2.字数统计)
 
 ## 1. 模块结构
 
