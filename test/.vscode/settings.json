@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Dark+",
+    "files.encoding": "utf8",
+
+    // Writing Assistant settings
+    "writingAssistant.term.hoverFiles": [
+        "*.md"
+    ]
+    
+}

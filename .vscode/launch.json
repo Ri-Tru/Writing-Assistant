@@ -1,0 +1,18 @@
+{
+    "version": "0.6.0",
+    "configurations": [
+        {
+            "name": "Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/extension"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/extension/**/*.js"
+            ],
+            // 可选：如果使用 TypeScript 或需要编译
+            // "preLaunchTask": "npm: watch"   
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+# 基础功能测试 Basic Functions Test
+
+本文件用于测试术语悬停、字数统计的基础功能。
+This file is for testing basic functions of term hover and 
+word count.
+
+测试术语悬停时，将鼠标光标置于待测试的术语上，观察是否弹出悬停卡片
+及其格式是否正确。
+When testing term hover, hover your cursor on the term word, 
+observing whether it pop up hover window,and whether it has a
+proper format.
+若有问题，查看控制台输出的调试信息。
+If any problem, open a console and check debuging information. 
+若无误，点击悬停卡片中的跳转链接，查看跳转功能是否正常。
+If all is right, click the links in hover window, to check the
+jumping function.
+
+测试字数统计时，选取一段文本，观察右下角是否出现字数统计数据。
+When testing word count, select a piece of text, observing if
+the bottom right corner appears statistics data.

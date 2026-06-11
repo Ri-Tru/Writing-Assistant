@@ -1,0 +1,100 @@
+{
+  "name": "writing-assistant",
+  "displayName": "Writing Assistant",
+  "description": "从Markdown字段读取摘要，悬停显示，单击跳转预览",
+  "version": "1.0.0",
+  "publisher": "RiTru",
+  "readme": "doc/README.md",
+  "icon": "icon.png",
+  "repository":"https://github.com/Ri-Tru/Writing-Assistant",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "writing-assistant.showDetail",
+        "title": "查看完整设定",
+        "category": "Writing Assistant"
+      },
+      {
+        "command": "writing-assistant.editTerm",
+        "title": "编辑术语设定",
+        "category": "Writing Assistant"
+      },
+      {
+        "command": "writing-assistant.reload",
+        "title": "重载术语索引",
+        "category": "Writing Assistant"
+      }
+    ],
+    "configuration": {
+      "title": "Writing Assistant",
+      "properties": {
+            "writingAssistant.hoverFiles": {
+                "type": "array",
+                "default": ["术语档案.md"],
+                "description": "术语档案文件路径列表（支持 glob 通配符）"
+            },
+            "writingAssistant.titleLevel": {
+                "type": "number",
+                "default": 2,
+                "description": "术语标题的 Markdown 级别"
+            },
+            "writingAssistant.hoverField": {
+                "type": "string",
+                "default": "摘要",
+                "description": "悬停显示的主字段名"
+            },
+            "writingAssistant.aliasField": {
+                "type": "string",
+                "default": "别称",
+                "description": "别名字段名，值支持逗号、顿号、空格分割"
+            },
+            "writingAssistant.showFields": {
+                "type": "array",
+                "default": [],
+                "description": "额外显示的字段列表"
+            },
+            "writingAssistant.scanRange": {
+                "type": "number",
+                "default": 5,
+                "description": "术语匹配时向左右两侧扫描的最大字符数"
+            },
+            "writingAssistant.previewMode": {
+                "type": "string",
+                "default": "builtin",
+                "enum": ["builtin", "mpe"],
+                "description": "Markdown预览器。builtin：内置；mpe：Markdown Preview Enhanced"
+            },
+            "writingAssistant.openLocation": {
+                "type": "string",
+                "default": "beside",
+                "enum": ["beside", "active"],
+                "description": "术语编辑跳转打开视图。beside：在侧边栏打开；active：在当前组打开"
+            },
+            "writingAssistant.wordCount": {
+                "type": "object",
+                "default": {
+                    "enabled": true,
+                    "excludeHeaders": true,
+                    "excludeBlankLines": true
+                },
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "excludeHeaders": { "type": "boolean" },
+                    "excludeBlankLines": { "type": "boolean" }
+                },
+                "description": "字数统计配置"
+            }
+        }
+    }
+  }
+}
