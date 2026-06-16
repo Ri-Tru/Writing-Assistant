@@ -1,0 +1,19 @@
+{
+  "command.showDetail.title": "查看完整设定",
+  "command.editTerm.title": "编辑术语设定",
+  "command.reload.title": "重载术语索引",
+  "command.category": "写作助手",
+  "config.title": "写作助手",
+  "config.previewMode.description": "Markdown预览器。builtin：内置；mpe：Markdown Preview Enhanced",
+  "config.openLocation.description": "术语编辑跳转打开视图。beside：在侧边栏打开；active：在当前组打开",
+  "config.term.termFiles.description": "术语档案文件路径列表（支持 glob 通配符）",
+  "config.term.hoverFiles.description": "术语档案文件路径列表（支持 glob 通配符）",
+  "config.term.titleLevel.description": "术语标题的 Markdown 级别",
+  "config.term.hoverField.description": "悬停显示的主字段名",
+  "config.term.aliasField.description": "别名字段名，值支持逗号、顿号、空格分割",
+  "config.term.showFields.description": "额外显示的字段列表",
+  "config.term.scanRange.description": "术语匹配时向左右两侧扫描的最大字符数",
+  "config.wordCount.enabled.description": "启用字数统计",
+  "config.wordCount.excludeHeaders.description": "统计时排除标题行",
+  "config.wordCount.excludeBlankLines.description": "统计时排除空白行"
+}

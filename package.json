@@ -1,0 +1,105 @@
+{
+  "name": "writing-assistant",
+  "displayName": "Writing Assistant",
+  "description": "Read summaries from Markdown fields, hover to display, click to preview",
+  "version": "1.0.0",
+  "publisher": "RiTru",
+  "icon": "imgs/icon.png",
+  "repository": "https://github.com/Ri-Tru/Writing-Assistant",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "writing-assistant.showDetail",
+        "title": "%command.showDetail.title%",
+        "category": "%command.category%"
+      },
+      {
+        "command": "writing-assistant.editTerm",
+        "title": "%command.editTerm.title%",
+        "category": "%command.category%"
+      },
+      {
+        "command": "writing-assistant.reload",
+        "title": "%command.reload.title%",
+        "category": "%command.category%"
+      }
+    ],
+    "configuration": {
+      "title": "%config.title%",
+      "properties": {
+        "writingAssistant.previewMode": {
+          "type": "string",
+          "default": "builtin",
+          "enum": ["builtin", "mpe"],
+          "description": "%config.previewMode.description%"
+        },
+        "writingAssistant.openLocation": {
+          "type": "string",
+          "default": "beside",
+          "enum": ["beside", "active"],
+          "description": "%config.openLocation.description%"
+        },
+        "writingAssistant.term.termFiles": {
+          "type": "array",
+          "default": ["术语档案.md"],
+          "description": "%config.term.termFiles.description%"
+        },
+        "writingAssistant.term.hoverFiles": {
+          "type": "array",
+          "default": [],
+          "description": "%config.term.hoverFiles.description%"
+        },
+        "writingAssistant.term.titleLevel": {
+          "type": "number",
+          "default": 2,
+          "description": "%config.term.titleLevel.description%"
+        },
+        "writingAssistant.term.hoverField": {
+          "type": "string",
+          "default": "摘要",
+          "description": "%config.term.hoverField.description%"
+        },
+        "writingAssistant.term.aliasField": {
+          "type": "string",
+          "default": "别称",
+          "description": "%config.term.aliasField.description%"
+        },
+        "writingAssistant.term.showFields": {
+          "type": "array",
+          "default": [],
+          "description": "%config.term.showFields.description%"
+        },
+        "writingAssistant.term.scanRange": {
+          "type": "number",
+          "default": 5,
+          "description": "%config.term.scanRange.description%"
+        },
+        "writingAssistant.wordCount.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.wordCount.enabled.description%"
+        },
+        "writingAssistant.wordCount.excludeHeaders": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.wordCount.excludeHeaders.description%"
+        },
+        "writingAssistant.wordCount.excludeBlankLines": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.wordCount.excludeBlankLines.description%"
+        }
+      }
+    }
+  }
+}

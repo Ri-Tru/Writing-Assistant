@@ -1,0 +1,19 @@
+{
+  "command.showDetail.title": "View Full Definition",
+  "command.editTerm.title": "Edit Term Definition",
+  "command.reload.title": "Reload Term Index",
+  "command.category": "Writing Assistant",
+  "config.title": "Writing Assistant",
+  "config.previewMode.description": "Markdown previewer. builtin: built-in; mpe: Markdown Preview Enhanced",
+  "config.openLocation.description": "Where to open term editing jumps. beside: open in side panel; active: open in current group",
+  "config.term.termFiles.description": "List of term definition file paths (supports glob patterns)",
+  "config.term.hoverFiles.description": "List of term definition file paths (supports glob patterns)",
+  "config.term.titleLevel.description": "Markdown heading level for term titles",
+  "config.term.hoverField.description": "Primary field name displayed on hover",
+  "config.term.aliasField.description": "Alias field name; values can be separated by commas, Chinese commas, or spaces",
+  "config.term.showFields.description": "List of additional fields to display",
+  "config.term.scanRange.description": "Maximum number of characters to scan left and right when matching terms",
+  "config.wordCount.enabled.description": "Enable word count",
+  "config.wordCount.excludeHeaders.description": "Exclude heading lines from word count",
+  "config.wordCount.excludeBlankLines.description": "Exclude blank lines from word count"
+}

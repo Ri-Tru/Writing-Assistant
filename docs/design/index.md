@@ -29,38 +29,53 @@ Writing Assistant 是一个纯 JavaScript 实现的 VS Code 扩展，零外部 n
 ## 3. 项目结构
 
 ```
-writing-assistant/
-├── .vscode/
-│   ├── launch.json             # 调试配置（F5 → Extension Host）
-│   └── settings.json           # 工作区推荐设置
+Writing-Assistant/                  # 项目根目录（也是扩展根目录）
 │
-├── extension/                  # 扩展本体
-│   ├── package.json            # 扩展清单（名称、版本、配置声明）
-│   ├── icon.png                # 扩展图标
-│   ├── src/                    # 源代码
-│   │   ├── extension.js        # 入口：激活/停用
-│   │   ├── config.js           # 配置管理
-│   │   ├── indexBuilder.js     # 术语索引构建
-│   │   ├── hoverProvider.js    # 悬停提供器
-│   │   ├── wordCount.js        # 字数统计
-│   │   ├── commands.js         # 命令注册 + 文件保存监听
-│   │   ├── markdownUtils.js    # Markdown 解析工具
-│   │   └── globUtils.js        # Glob 匹配（预留）
-│   └── doc/                    # 用户文档（README/CONFIG/EXAMPLES/CHANGELOG）
+├── .vscode/                        # VSCode 工作区调试配置
+│   ├── launch.json                 # 调试启动配置（直接 F5）
+│   └── settings.json               # 推荐的工作区设置（可选）
 │
-├── documents/                  # 设计 & 开发者文档
-│   ├── design/
-│   │   ├── index.md            # ← 本文
-│   │   ├── termMgmt.md         # 术语管理模块详解
-│   │   ├── wordCount.md        # 字数统计模块详解
-│   │   └── termGrammar.md      # @hover 指令语法参考
-│   └── dev/
-│       ├── CONTRIBUTING.md     # 贡献指南
-│       ├── BUILD_PUBLISH.md    # 构建与发布
-│       └── TESTING.md          # 测试指南
+├── src/                            # 核心源代码（全部在此）
+│   ├── extension.js                # 扩展入口
+│   ├── commands.js                 # 命令具体实现
+│   ├── config.js                   # 获取项目配置
+│   ├── hoverProvider.js            # 悬停提供器
+│   ├── indexBuilder.js             # 创建悬停索引
+│   ├── markdownUtils.js            # Markdown解析器
+│   ├── globUtil.js                 # glob通配符路径处理
+│   ├── wordCount.js                # 字数统计模块
+│   └── i18n/                       # 代码内部多语言包（vscode-nls 专用）
+│       ├── bundle.l10n.json        # 默认语言（英文 / 后备语言）
+│       └── bundle.l10n.zh-cn.json  # 简体中文覆盖
 │
-├── test/                       # 测试数据
-└── build.py                    # 打包脚本
+├── docs/                           # 开发者内部文档（不打包进 .vsix）
+│   ├── design/                     # 架构设计、流程图
+│   │   └── architecture.md
+│   └── dev/                        # 贡献指南、发布流程、测试指南
+│       ├── CONTRIBUTING.md
+│       ├── BUILD_PUBLISH.md
+│       └── TESTING.md
+│
+├── test/                           # 测试代码与测试数据（不打包）
+│   ├── runTest.js
+│   ├── suite/
+│   │   └── extension.test.js
+│   └── fixtures/                   # 测试用的模拟文件
+│
+├── images/                         # 静态资源（截图、图标等）
+│   ├── icon.png                    # 扩展图标（package.json 中引用）
+│   └── screenshot-demo.png         # README 中引用的演示截图
+│
+├── package.json                    # 扩展清单
+├── package.nls.json                # 静态清单英文（命令标题/菜单/设置描述）
+├── package.nls.zh-cn.json          # 态清单简体中文
+│
+├── README.md                       # 用户文档
+├── CHANGELOG.md                    # 更新日志（可选，建议单语言）
+│
+├── .vscodeignore                   # 打包忽略规则
+├── .gitignore                      # Git 忽略规则
+└── LICENSE                         # 许可证
 ```
 
 ---

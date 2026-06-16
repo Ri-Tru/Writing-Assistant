@@ -115,7 +115,7 @@ function parseSingleFileAndUpdateIndex(filePath) {
         const titleMatch = trimmed.match(titlePattern);
         if (titleMatch) {
             // 保存上一个术语
-            if (currentName) processTerm(currentName, filePath, prevLineNum);}
+            if (currentName) processTerm(currentName, filePath, prevLineNum);
             currentName = titleMatch[1].trim();
             prevLineNum = lineNum;
             continue;
@@ -150,11 +150,10 @@ function parseSingleFileAndUpdateIndex(filePath) {
             }
         }
         lineNum += 1;
+    }
 
     // 处理文件末尾的最后一个术语
-    if (currentName) {
-        processTerm(currentName, filePath, prevLineNum);
-    }
+    if (currentName) processTerm(currentName, filePath, prevLineNum); 
 }
 
 /**

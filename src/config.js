@@ -33,19 +33,19 @@ function loadConfig() {
         openLocation: settings.get('openLocation', "beside"),
         // 术语管理设置
         term: {
-            hoverFiles: settings.get('term.hoverFiles', ["术语档案.md"]),
-            titleLevel: settings.get('term.titleLevel', 2),
-            hoverField: settings.get('term.hoverField', "摘要"),
-            aliasField: settings.get('term.aliasField', "别称"),
-            showFields: settings.get('term.showFields', []),
-            fileRules: settings.get('term.fileRules', []),
-            scanRange: settings.get('term.scanRange', 5)
+            termFiles: settings.get('term.termFiles'),
+            hoverFiles: settings.get('term.hoverFiles'),
+            titleLevel: settings.get('term.titleLevel'),
+            hoverField: settings.get('term.hoverField'),
+            aliasField: settings.get('term.aliasField'),
+            showFields: settings.get('term.showFields'),
+            scanRange: settings.get('term.scanRange')
         },
         // 字数统计设置
         wordCount: {
-            enabled: settings.get('wordCount.enabled', true),
-            excludeHeaders: settings.get('wordCount.excludeHeaders', true),
-            excludeBlankLines: settings.get('wordCount.excludeBlankLines', true)
+            enabled: settings.get('wordCount.enabled'),
+            excludeHeaders: settings.get('wordCount.excludeHeaders'),
+            excludeBlankLines: settings.get('wordCount.excludeBlankLines')
         }
     };
 

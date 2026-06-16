@@ -5,7 +5,7 @@
 
 ## 配置项详情
 | 配置项 | 说明 | 缺省值 |
-|--------|------|--------|
+|------|------|------|
 | `writingSssistant.mainText` | 指定正文文件 | `["正文/*.md"]` |
 | `writingAssistant.previewMode` | 跳转Markdown预览使用的预览器。`builtin`：VS Code内置预览器；`mpe`：Markdown Preview Enhanced扩展 | `"builtin"` |
 | `writingAssistant.openLocation` | 术语编辑跳转打开视图。`beside`：在侧边栏打开；`active`：在当前组打开 | `"beside"` |
@@ -24,6 +24,6 @@
 
 完整配置示例请参考 [EXAMPLES.zh-cn.md](EXAMPLES.zh-cn.md) 中的配置示例。
 
------------
+----------
 
-*版本：V1.0，上次更新：2026-6-11*
+*版本：V1.0，上次更新：2026-6-16*
