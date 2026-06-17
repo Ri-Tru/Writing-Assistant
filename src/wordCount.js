@@ -1,6 +1,5 @@
 /**
  * 字数统计模块
- * V0.1 2026-4-30
  * 
  * 在状态栏右侧显示当前 txt 文件的字数统计。
  * 支持全文和选区字数的实时更新，并可配置排除标题行、空行等。
@@ -22,6 +21,27 @@ let statusBarItem = null;
 let wordCountTimeout = null;
 
 /**
+ * 文本处理、字数统计
+ * @param {string} text     - 待统计文本
+ * @returns {number}        - 统计字数
+ */
+function countText(text, config) {
+    const wc = config.wordCount;
+
+    let lines = text.split(/\r?\n/);
+    if (wc.excludeHeaders) {
+        lines = lines.filter(line => !line.trim().startsWith('#'));
+    }
+    if (wc.excludeBlankLines) {
+        lines = lines.filter(line => line.trim().length > 0);
+    }
+    text = lines.join('');
+    text = text.replace(/\b[a-zA-Z]+\b/g, 'a');   // 英文单词处理
+    text = text.replace(/\s+/g, '');             // 去除空格
+    return text.length;
+}
+
+/**
  * 计算文档的字数（中文字符计数，移除空白）
  * @param {vscode.TextDocument} doc       - 当前文档
  * @param {vscode.Selection} selection    - 当前选区
@@ -29,33 +49,14 @@ let wordCountTimeout = null;
  * @returns {{ fullChars:number, selectedChars:number, isSelected:boolean }}
  */
 function computeWordCount(doc, selection, config) {
-    const wc = config.wordCount;
-
     // 全文处理
     const fullText = doc.getText();
-    let fullLines = fullText.split(/\r?\n/);
-    if (wc.excludeHeaders) {
-        fullLines = fullLines.filter(line => !line.trim().startsWith('#'));
-    }
-    if (wc.excludeBlankLines) {
-        fullLines = fullLines.filter(line => line.trim().length > 0);
-    }
-    const fullChars = fullLines.join('').replace(/\s+/g, '').length;
+    const fullChars = countText(fullText, config);
 
     // 选中区域处理
     const selectedText = doc.getText(selection);
     const isSelected = selectedText.length > 0;
-    let selectedChars = 0;
-    if (isSelected) {
-        let selectedLines = selectedText.split(/\r?\n/);
-        if (wc.excludeHeaders) {
-            selectedLines = selectedLines.filter(line => !line.trim().startsWith('#'));
-        }
-        if (wc.excludeBlankLines) {
-            selectedLines = selectedLines.filter(line => line.trim().length > 0);
-        }
-        selectedChars = selectedLines.join('').replace(/\s+/g, '').length;
-    }
+    const selectedChars = countText(selectedText, config);
 
     return { fullChars, selectedChars, isSelected };
 }
@@ -99,34 +100,14 @@ function updateWordCount() {
 }
 
 /**
- * 初始化字数统计功能：创建状态栏项并注册相关事件监听器
+ * 初始化字数统计功能：创建状态栏项
  * @param {vscode.ExtensionContext} context
  */
 function initWordCount(context) {
     // 创建状态栏项，对齐右侧，优先级 100
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     context.subscriptions.push(statusBarItem);
-
-    // 监听活动编辑器切换
-    const activeEditorListener = vscode.window.onDidChangeActiveTextEditor(() => updateWordCount());
-
-    // 监听文本内容变更（仅当前活动编辑器变更时触发）
-    const changeTextListener = vscode.workspace.onDidChangeTextDocument((e) => {
-        if (e.document === vscode.window.activeTextEditor?.document) {
-            updateWordCount();
-        }
-    });
-
-    // 监听选区变更，但只在 .txt 文件时才更新（减少不必要的计算）
-    const selectionListener = vscode.window.onDidChangeTextEditorSelection(() => {
-        const editor = vscode.window.activeTextEditor;
-        if (editor && editor.document.fileName.endsWith('.txt')) {
-            updateWordCount();
-        }
-    });
-
-    context.subscriptions.push(activeEditorListener, changeTextListener, selectionListener);
-
+    
     // 立即执行一次更新，显示当前编辑器字数
     updateWordCount();
 }

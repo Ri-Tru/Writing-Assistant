@@ -116,40 +116,7 @@ code .
 
 ## 4. 项目结构
 
-```
-writing-assistant/
-├── .vscode/                       # VSCode 调试配置
-│   ├── launch.json                # 调试启动配置（"Run Extension"）
-│   └── settings.json              # 工作区推荐设置
-│
-├── extension/                     # 扩展代码（核心）
-│   ├── package.json               # 扩展清单（名称、版本、配置声明等）
-│   ├── extension.js               # 入口：激活/停用
-│   ├── config.js                  # 配置管理
-│   ├── indexBuilder.js            # 术语索引构建
-│   ├── hoverProvider.js           # 悬停提供器
-│   ├── wordCount.js               # 字数统计
-│   ├── commands.js                # 命令注册 & 文件保存监听
-│   ├── globUtils.js               # 极简 glob 匹配工具
-│   ├── markdownUtils.js           # Markdown 解析工具
-│   └── icon.png                   # 扩展图标
-│
-├── documents/                     # 文档（用户 & 开发者）
-│   ├── README/                    # 用户手册（EN + ZH）
-│   ├── CONFIG/                    # 配置指南（ZH）
-│   ├── EXAMPLES/                  # 使用示例（ZH）
-│   ├── CHANGELOG/                 # 更新日志（ZH）
-│   ├── design/                    # 技术设计文档（ZH）
-│   └── dev/                       # 开发者文档 ← 你在这里
-│
-├── test/                          # 测试数据
-│   ├── termTest.md
-│   └── wordCountTest.txt
-│
-├── build.py                       # Python 打包脚本
-├── LICENCE.txt
-└── temp.md                        # 临时文件（可忽略）
-```
+参见 [index.md](../design/index.md#3-项目结构)
 
 > **重要**：VSCode 扩展要求 `package.json` 与扩展主文件在同一目录。当前布局中，`extension/` 即为扩展根目录。
 
@@ -157,16 +124,7 @@ writing-assistant/
 
 ## 5. 模块职责一览
 
-| 模块 | 文件 | 核心职责 |
-|------|------|----------|
-| **入口** | `extension.js` | 激活/停用钩子，按序初始化所有模块 |
-| **配置** | `config.js` | 从 VSCode settings 读取配置，提供缓存与热重载 |
-| **索引** | `indexBuilder.js` | 扫描术语档案文件，构建内存中的术语映射表 (TermMap) |
-| **悬停** | `hoverProvider.js` | 注册 HoverProvider，实现光标附近术语匹配与卡片渲染 |
-| **命令** | `commands.js` | 注册 `showDetail` / `editTerm` / `reload` 命令；监听文件保存 |
-| **字数** | `wordCount.js` | 状态栏字数统计（仅 .txt 文件） |
-| **工具** | `markdownUtils.js` | 标题正则生成、字段行解析、@hover 注释解析 |
-| **工具** | `globUtils.js` | 简易 glob 模式匹配（* 和 **） |
+参见 [index.md](../design/index.md#各模块职责一览)
 
 ### 依赖关系
 
@@ -200,7 +158,6 @@ extension.js
 ```javascript
 /**
  * 模块简短说明
- * V0.1 YYYY-MM-DD
  * 
  * [详细描述]
  * 
@@ -234,7 +191,7 @@ extension.js
 
 - 文件操作类错误使用 `try/catch` 或 `existsSync` 预检
 - API 调用失败（如 MPE 预览回退）使用 `.then(undefined, () => fallback)`
-- 不要吞掉异常：至少 `console.error` 记录
+- 不要吞掉异常：用 `logger.error` 记录
 
 ---
 
@@ -242,7 +199,7 @@ extension.js
 
 ### 7-1. 功能开发
 
-1. 在 `dev` 分支或 fork 仓库中开发
+1. 在 fork 仓库中开发
 2. 在 `test/` 下准备测试数据
 3. 按 F5 启动调试，验证功能
 4. 更新相关文档（用户手册 + 设计文档）
@@ -303,5 +260,3 @@ chore: 构建/工具变动
 | dev/ 开发者文档 | ✅ | ⬜ 待翻译 |
 
 ---
-
-*本文档版本：1.0，最后更新：2026-06-11*

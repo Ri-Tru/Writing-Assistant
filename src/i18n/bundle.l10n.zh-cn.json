@@ -1,0 +1,9 @@
+{
+    "ExtensionActivated": "[Writing Assistant]扩展已激活。",
+    "pleaseOpenFolder": "请先打开一个文件夹。",
+    "termNotFound": "未找到术语：{term}。",
+    "noTermFilesConfigured": "未配置术语文件。请在设置中配置 \"writingAssistant.term.termFiles\"。",
+    "termReloaded": "已重载 {num} 个文件，{size} 条术语。",
+    "MPENotInstalled": "Markdown Preview Enhanced扩展未安装。",
+    "FailedToReadFile": "无法读取文件：{filePath}."
+}

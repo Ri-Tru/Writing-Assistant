@@ -1,0 +1,31 @@
+# 开发环境配置
+.vscode/
+.git/
+.github/
+
+# 项目文档
+docs/dev/
+docs/design/
+
+# 测试相关
+test/
+**/*.test.js
+**/*.spec.js
+
+# 项目配置文件
+.gitignore
+.vscodeignore
+.editorconfig
+.prettierrc*
+.eslintrc*
+build.py
+*.code-workspace
+
+# 依赖与构建产物
+node_modules/
+out/
+*.vsix
+
+# 系统文件
+.DS_Store
+Thumbs.db

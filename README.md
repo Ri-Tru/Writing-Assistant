@@ -1,6 +1,6 @@
 # Writing Assistant
 
-[中文](docs/user/README.zh-cn.md)
+**[中文版本](docs/user/README.zh-cn.md)**
 
 ---
 
@@ -21,24 +21,7 @@ If any questions, please [open an issue](https://github.com/Ri-Tru/Writing-Assis
 ### 1-2. Setup
 
 Writing Assistant has no extra dependencies. If you need advanced Markdown preview functions (like mermaid chart preview), you can install extension Markdown Preview Enhanced.  
-For use, the default configuration values are sufficient for simple projects. The basic default configuration is as follows:
-
-```json
-{
-    // Workspace general settings
-    "files.encoding": "utf8",
-    // Writing Assistant extension settings
-    "writingAssistant.previewMode": "builtin",
-    "writingAssistant.openLocation": "beside",
-    "writingAssistant.term.hoverFiles": [
-        "设定/*.md"
-    ],
-    "writingAssistant.term.titleLevel": 2,
-    "writingAssistant.term.hoverField": "摘要",
-    "writingAssistant.term.aliasField": "别称",
-    "writingAssistant.wordCount.enabled": true
-}
-```
+For use, the default configuration values are sufficient for simple projects.
 
 [Detailed Configuration Guide](docs/user/CONFIG.zh-cn.md)
 
@@ -118,10 +101,6 @@ Other limitations are described in the documentation for each feature.
 ## 6. Compatibility
 
 Minimum required VSCode version: 1.70.0. Tested on Windows + VSCode 1.121.0. Linux/macOS and earlier versions have not been fully tested; feedback is welcome if you encounter issues.
-
----
-
-*Version: V1.0, Last updated: 2026-06-16*
 
 ---
 

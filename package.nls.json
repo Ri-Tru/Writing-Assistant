@@ -1,6 +1,7 @@
 {
   "command.showDetail.title": "View Full Definition",
   "command.editTerm.title": "Edit Term Definition",
+  "command.searchTerm.title": "Search As Term",
   "command.reload.title": "Reload Term Index",
   "command.category": "Writing Assistant",
   "config.title": "Writing Assistant",

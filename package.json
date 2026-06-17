@@ -2,7 +2,7 @@
   "name": "writing-assistant",
   "displayName": "Writing Assistant",
   "description": "Read summaries from Markdown fields, hover to display, click to preview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "RiTru",
   "icon": "imgs/icon.png",
   "repository": "https://github.com/Ri-Tru/Writing-Assistant",
@@ -16,6 +16,7 @@
     "onStartupFinished"
   ],
   "main": "src/extension.js",
+  "l10n": "src/i18n",
   "contributes": {
     "commands": [
       {
@@ -29,29 +30,65 @@
         "category": "%command.category%"
       },
       {
+        "command": "writing-assistant.searchTerm",
+        "title": "%command.searchTerm.title%",
+        "category": "%command.category"
+      },
+      {
         "command": "writing-assistant.reload",
         "title": "%command.reload.title%",
         "category": "%command.category%"
       }
     ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "writing-assistant.searchTerm",
+          "group": "z_commands",
+          "when": "editorTextFocus && editorHasSelection"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "writing-assistant.showDetail",
+          "when": "fasle"
+        },
+        {
+          "command": "writing-assistant.editTerm",
+          "when": "false"
+        },
+        {
+          "command": "writing-assistant.searchTerm",
+          "when": "false"
+        } 
+      ]
+    },
     "configuration": {
       "title": "%config.title%",
       "properties": {
         "writingAssistant.previewMode": {
           "type": "string",
           "default": "builtin",
-          "enum": ["builtin", "mpe"],
+          "enum": [
+            "builtin",
+            "mpe"
+          ],
           "description": "%config.previewMode.description%"
         },
         "writingAssistant.openLocation": {
           "type": "string",
           "default": "beside",
-          "enum": ["beside", "active"],
+          "enum": [
+            "beside",
+            "active"
+          ],
           "description": "%config.openLocation.description%"
         },
         "writingAssistant.term.termFiles": {
           "type": "array",
-          "default": ["术语档案.md"],
+          "default": [
+            "术语档案.md"
+          ],
           "description": "%config.term.termFiles.description%"
         },
         "writingAssistant.term.hoverFiles": {

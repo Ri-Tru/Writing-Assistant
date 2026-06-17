@@ -1,6 +1,7 @@
 {
   "command.showDetail.title": "查看完整设定",
   "command.editTerm.title": "编辑术语设定",
+  "command.searchTerm.title": "作为术语搜索",
   "command.reload.title": "重载术语索引",
   "command.category": "写作助手",
   "config.title": "写作助手",

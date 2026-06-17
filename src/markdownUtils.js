@@ -1,6 +1,5 @@
 /**
  * Markdown 解析工具模块
- * V0.1 2026-4-30
  * 
  * 提供用于解析术语档案 Markdown 文件的辅助函数：
  * - 构建标题正则（根据级别 # 数量）
@@ -8,7 +7,8 @@
  * - 解析 @hover 注释指令：<!-- @hover: key="value" ... -->
  * 
  * 依赖：
- * - getConfig()              -> 获取配置
+ * - config.js                -> getConfig() 获取配置
+ * - logger.js                -> 日志管理
  * 
  * 导出：
  * - getTitlePattern(level)   -> 返回匹配指定级别标题的正则表达式
@@ -18,6 +18,7 @@
 
 const vscode = require('vscode');
 const { getConfig } = require('./config');
+const logger = require('./logger');
 
 /**
  * 生成用于匹配 Markdown 标题的正则表达式
@@ -68,7 +69,11 @@ function parseHoverComment(termLine, isFileLevel = false) {
             if (key.startsWith('file.')) {
                 // 仅文件级配置允许使用 file. 前缀，表示这是针对整个文件的配置
                 if (isFileLevel) key = key.slice(5);
-                else return null; // 非文件级配置不应包含 file. 前缀
+                else {
+                    // 非文件级配置不应包含 file. 前缀
+                    logger.warn("markdownUtil", "invalid prefix 'file.'", {termLine});
+                    return null;
+                }
             }
             // 去除引号（双引号或单引号）
             if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
@@ -104,6 +109,7 @@ async function getTermInfo(filePath, lineNum) {
     while (override) {
         Object.assign(currentConfig, override);
         lineNumber += 1;
+        if (lineNumber >= doc.lineCount) return null;
         lineText = doc.lineAt(lineNumber).text;
         override = parseHoverComment(lineText, true);
     }
@@ -125,6 +131,7 @@ async function getTermInfo(filePath, lineNum) {
     while (override) {
         Object.assign(currentConfig, override);
         lineNumber += 1;
+        if (lineNumber >= doc.lineCount) return null;
         lineText = doc.lineAt(lineNumber).text;
         override = parseHoverComment(lineText);
     }
@@ -133,6 +140,7 @@ async function getTermInfo(filePath, lineNum) {
     while (override) {
         Object.assign(currentConfig, override);
         lineNumber += 1;
+        if (lineNumber >= doc.lineCount) return;
         lineText = doc.lineAt(lineNumber).text;
         override = parseHoverComment(lineText);
     }
@@ -150,6 +158,7 @@ async function getTermInfo(filePath, lineNum) {
             };
         }
         lineNumber += 1;
+        if (lineNumber >= doc.lineCount) break;
         lineText = doc.lineAt(lineNumber).text;
         parse = parseFieldLine(lineText);
     }

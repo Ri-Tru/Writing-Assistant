@@ -3,8 +3,10 @@
     "files.encoding": "utf8",
 
     // Writing Assistant settings
+    "writingAssistant.term.termFiles": [
+        "*.md"
+    ],
     "writingAssistant.term.hoverFiles": [
         "*.md"
     ]
-    
 }

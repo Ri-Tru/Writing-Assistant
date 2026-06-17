@@ -1,0 +1,9 @@
+{
+    "ExtensionActivated": "[Writing Assistant] extension activated.",
+    "pleaseOpenFolder": "Please Open a Folder.",
+    "termNotFound": "Didn't find term: {term}.",
+    "noTermFilesConfigured": "No term files configured. Please set \"writingAssistant.term.termFiles\" in settings.",
+    "termReloaded": "{num} file(s), {size} term(s) reloaded.",
+    "MPENotInstalled": "Markdown Preview Enhanced extension not installed.",
+    "FailedToReadFile": "Failed to Read File: {filePath}."
+}
