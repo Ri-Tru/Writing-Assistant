@@ -36,7 +36,7 @@ function getTitlePattern(level) {
  * @returns {{fieldName:string, fieldValue:string}|null}
  */
 function parseFieldLine(line) {
-    const match = line.match(/^-\s*\*\*(.+?)\*\*\s*[:：]\s*(.*)$/);
+    const match = line.match(/^\s*-\s*\*\*(.+?)\*\*\s*[:：]\s*(.*)$/);
     if (match) {
         return {
             fieldName: match[1].trim(),
@@ -115,8 +115,7 @@ async function getTermInfo(filePath, lineNum) {
     }
 
     // 加入标题作为URL锚点
-    lineNumber = lineNum;
-    lineText = doc.lineAt(lineNumber).text;
+    lineText = doc.lineAt(lineNum).text;
     let hoverInfo = {
         // 锚点格式为标题文本，去掉前导#和空白字符
         anchor: lineText.trim().replace(/#+\s+/g, '')
@@ -124,24 +123,24 @@ async function getTermInfo(filePath, lineNum) {
 
 
     // 解析术语级 @hover 配置（如果存在）
-    lineNumber += 1;  // 从术语标题行的下一行开始解析
-    if (lineNumber >= doc.lineCount) return null;
-    lineText = doc.lineAt(lineNumber).text;
+    lineNum++;  // 从术语标题行的下一行开始解析
+    if (lineNum >= doc.lineCount) return null;
+    lineText = doc.lineAt(lineNum).text;
     override = parseHoverComment(lineText, true);
     while (override) {
         Object.assign(currentConfig, override);
-        lineNumber += 1;
-        if (lineNumber >= doc.lineCount) return null;
-        lineText = doc.lineAt(lineNumber).text;
+        lineNum++;
+        if (lineNum >= doc.lineCount) return null;
+        lineText = doc.lineAt(lineNum).text;
         override = parseHoverComment(lineText);
     }
     
     // 从当前行号往后逐行读取，并解析术语悬停信息
     while (override) {
         Object.assign(currentConfig, override);
-        lineNumber += 1;
-        if (lineNumber >= doc.lineCount) return;
-        lineText = doc.lineAt(lineNumber).text;
+        lineNum += 1;
+        if (lineNum >= doc.lineCount) return;
+        lineText = doc.lineAt(lineNum).text;
         override = parseHoverComment(lineText);
     }
     
@@ -157,9 +156,9 @@ async function getTermInfo(filePath, lineNum) {
                 [parse.fieldName]: parse.fieldValue
             };
         }
-        lineNumber += 1;
-        if (lineNumber >= doc.lineCount) break;
-        lineText = doc.lineAt(lineNumber).text;
+        lineNum += 1;
+        if (lineNum >= doc.lineCount) break;
+        lineText = doc.lineAt(lineNum).text;
         parse = parseFieldLine(lineText);
     }
     return hoverInfo;

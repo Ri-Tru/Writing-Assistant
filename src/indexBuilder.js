@@ -79,45 +79,49 @@ function processTerm(name, filePath, lineNum) {
  * 解析单个 Markdown 文件，提取其中的术语信息并更新内存索引
  * @param {string} filePath - 文件绝对路径
  */
-function parseSingleFileAndUpdateIndex(filePath) {
+async function parseSingleFileAndUpdateIndex(filePath) {
     const config = getConfig();
     const encoding = config.encoding;
     let titleLevel = config.term.titleLevel;
     let aliasField = config.term.aliasField;
-    let content;
+    let doc;
 
     try {
-        content = fs.readFileSync(filePath, encoding);
+        doc = await vscode.workspace.openTextDocument(filePath);
     } catch (err) {
         vscode.window.showErrorMessage(localize("FailedToReadFile", {filePath}));
         logger.error("indexBuilder", "failed to read file", {filePath});
         return;
     }
     const sourceFileRel = vscode.workspace.asRelativePath(filePath);
-    let lineNum = 0;
     
-    const lines = content.split(/\s?\n\s?/);
-
+    let lineNum = 0;
+    let line = doc.lineAt(lineNum).text;
     // 获取是否有匹配该文件的 fileRule 配置（可覆盖全局标题级别等）
-    while (lines[0].startsWith('<!--')) {
+    while (line.startsWith('<!--')) {
         lineNum += 1;
-        const override = parseHoverComment(lines[0], true);
+        const override = parseHoverComment(line, true);
         if (override && override['titleLevel']) {
             titleLevel = override['titleLevel'];
         } else if (override && override['aliasField']) {
             aliasField = override['aliasField'];
         }
-        lines.shift();
+        line = doc.lineAt(lineNum).text;
     }
     
     const titlePattern = getTitlePattern(titleLevel);
+    logger.debug("indexBuilder", "config", {
+        encoding,
+        titleLevel,
+        aliasField
+    })
 
     let currentName = null;
     let prevLineNum = 0;
     let overrides = null;
 
-    for (const line of lines) {
-        const trimmed = line.trim();
+    while (lineNum < doc.lineCount) {
+        const trimmed = doc.lineAt(lineNum).text.trim();
         lineNum += 1;
 
         // 匹配标题行（术语名）

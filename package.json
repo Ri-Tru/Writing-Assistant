@@ -2,7 +2,7 @@
   "name": "writing-assistant",
   "displayName": "Writing Assistant",
   "description": "Read summaries from Markdown fields, hover to display, click to preview",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "RiTru",
   "icon": "imgs/icon.png",
   "repository": "https://github.com/Ri-Tru/Writing-Assistant",

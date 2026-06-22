@@ -87,12 +87,13 @@ async function termHover(document, position, token) {
     if (termInfo.hoverField) {
         hoverLines.push(termInfo.hoverField);
     }
-    if (Array.isArray(termInfo.showFields)) {
-        for (const f of termInfo.showFields) {
-            if (termInfo.fields[f]) {
-                hoverLines.push(`**${f}**: ${termInfo.fields[f]}`);
-            }
-        }
+    logger.debug("hoverProvider",
+        "termInfo length",
+        {length: Object.keys(termInfo.showFields).length});
+    if (Object.keys(termInfo.showFields).length > 0) {
+        Object.entries(termInfo.showFields).forEach(([key, value]) => {
+            hoverLines.push(`- **${key}**: ${value}`);
+        });
     }
     // 分隔线和可点击的命令链接（打开完整设定预览）
     hoverLines.push('', '---');
